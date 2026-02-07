@@ -89,28 +89,42 @@ p {
   margin-top: 60px;
 }
 
-.music-hint {
+/* PROMINENT MUSIC BUTTON */
+.music-btn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 0.85rem;
-  opacity: 0.6;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 22px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.05);
+  color: #e6e6e6;
+  font-size: 0.9rem;
   cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.music-btn:hover {
+  background: rgba(255,255,255,0.12);
 }
 </style>
 </head>
 
 <body>
 
-<audio id="bgm" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4f3c7c6d3b.mp3" type="audio/mpeg">
+<!-- LOCAL MUSIC FILE -->
+<audio id="bgm" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<div class="music-hint" onclick="toggleMusic()">♪ tap for sound</div>
+<div class="music-btn" onclick="toggleMusic()">♪ tap for sound</div>
 
 <section class="section">
   <div class="container fade">
-    <h1>Dear Mansi,Today is Propose Day</h1>
+    <h1>Dear Mansi, Today is Propose Day</h1>
     <p>
       Not the kind that demands clarity.<br>
       But the kind that simply speaks.
@@ -205,15 +219,18 @@ const observer = new IntersectionObserver(entries => {
 faders.forEach(fade => observer.observe(fade));
 
 const music = document.getElementById('bgm');
+const btn = document.querySelector('.music-btn');
 let playing = false;
 
 function toggleMusic() {
   if (!playing) {
     music.volume = 0.3;
     music.play();
+    btn.textContent = '❚❚ pause sound';
     playing = true;
   } else {
     music.pause();
+    btn.textContent = '♪ tap for sound';
     playing = false;
   }
 }
