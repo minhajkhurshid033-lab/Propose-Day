@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Inter:wght@300;400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f0f, #2b2b2b, #0f0f0f);
+  color: #e6e6e6;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.section {
+  min-height: 100vh;
+  padding: 70px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 900px;
+  text-align: center;
+}
+
+.fade {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: all 1.3s ease;
+}
+
+.fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 25px;
+  font-weight: 400;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 400;
+  font-style: italic;
+  color: #d8d8d8;
+}
+
+p {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  margin-bottom: 25px;
+  color: #cfcfcf;
+}
+
+.grey-box {
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 45px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
+}
+
+.heart {
+  font-size: 1.6rem;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+.footer {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin-top: 60px;
+}
+
+.music-hint {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4f3c7c6d3b.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-hint" onclick="toggleMusic()">♪ tap for sound</div>
+
+<section class="section">
+  <div class="container fade">
+    <h1>Today is Propose Day</h1>
+    <p>
+      Not the kind that demands clarity.<br>
+      But the kind that simply speaks.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container fade grey-box">
+    <p>
+      I know we don’t stand on the same page.<br>
+      And that’s okay — I truly mean that.
+    </p>
+
+    <p>
+      But somehow,<br>
+      you still hold a space in my life<br>
+      that feels calm, familiar, and quietly important.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container fade">
+    <h2>Not everything needs a definition</h2>
+
+    <p>
+      Some bonds aren’t meant to be explained.<br>
+      They just exist —<br>
+      in conversations that linger,<br>
+      in comfort that arrives without asking.
+    </p>
+
+    <p>
+      Somewhere between black and white,<br>
+      there are softer shades where moments breathe.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container fade grey-box">
+    <p>
+      I’m not asking you for more.<br>
+      I’m not asking you to change anything.
+    </p>
+
+    <p>
+      I only wanted you to know this —
+    </p>
+
+    <p>
+      Your presence makes my days lighter,<br>
+      my thoughts quieter,<br>
+      and some silences feel less empty.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container fade">
+    <div class="heart">♡</div>
+
+    <p>
+      So this is my proposal —
+    </p>
+
+    <p>
+      To honesty without expectation.<br>
+      To connection without pressure.<br>
+      To letting this space remain gentle,<br>
+      exactly as it is.
+    </p>
+
+    <p class="footer">
+      — from someone who values you, deeply and quietly
+    </p>
+  </div>
+</section>
+
+<script>
+const faders = document.querySelectorAll('.fade');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.3 });
+
+faders.forEach(fade => observer.observe(fade));
+
+const music = document.getElementById('bgm');
+let playing = false;
+
+function toggleMusic() {
+  if (!playing) {
+    music.volume = 0.3;
+    music.play();
+    playing = true;
+  } else {
+    music.pause();
+    playing = false;
+  }
+}
+</script>
+
+</body>
+</html>
